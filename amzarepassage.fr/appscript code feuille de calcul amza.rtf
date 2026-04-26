@@ -1,0 +1,214 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1036{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang12 // Script doPost pour g\'e9rer la soumission du formulaire\par
+function doPost(e) \{\par
+    try \{\par
+        // V\'e9rifie si e est d\'e9fini et qu'il contient la propri\'e9t\'e9 'parameter'\par
+        if (e && e.parameter) \{\par
+            // Acc\'e8s aux donn\'e9es envoy\'e9es depuis le formulaire\par
+            var nomComplet = e.parameter.fullName;\par
+            var adresse = e.parameter.address;\par
+            var numeroTelephone = e.parameter.phoneNumber;\par
+            var email = e.parameter.email;\par
+            var confirmEmail = e.parameter.confirmEmail;\par
+            var date1 = e.parameter.date1;\par
+            var heureDebut1 = e.parameter.heureDebut1;\par
+            var nombreHeures = e.parameter.nombreheurs;\par
+            var conditionsGenerales = e.parameter.conditionsGenerales;\par
+\par
+            var servicesouhaite = e.parameter.servicesouhaite;\par
+            var frequence = e.parameter.frequence;\par
+            var demandes = e.parameter.demandes;\par
+\par
+            // Enregistrement des donn\'e9es dans la feuille de calcul\par
+            const sheet = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/1gUuYrWsG-S4NDaeRyTRsnQuDCYOqIAMkKrG6ee6tEUQ/edit?gid=0#gid=0").getSheetByName("data particulier");\par
+            var lastRow = sheet.getLastRow();\par
+            sheet.getRange(lastRow + 1, 1).setValue(nomComplet);\par
+            sheet.getRange(lastRow + 1, 2).setValue(adresse);\par
+            sheet.getRange(lastRow + 1, 3).setValue(numeroTelephone);\par
+            sheet.getRange(lastRow + 1, 4).setValue(email);\par
+            sheet.getRange(lastRow + 1, 5).setValue(confirmEmail);\par
+            sheet.getRange(lastRow + 1, 6).setValue(date1);\par
+            sheet.getRange(lastRow + 1, 7).setValue(heureDebut1);\par
+            sheet.getRange(lastRow + 1, 8).setValue(nombreHeures);\par
+            sheet.getRange(lastRow + 1, 9).setValue(conditionsGenerales);\par
+            sheet.getRange(lastRow + 1, 10).setValue(servicesouhaite);\par
+            sheet.getRange(lastRow + 1, 11).setValue(frequence);\par
+            sheet.getRange(lastRow + 1, 12).setValue(demandes);\par
+\par
+            // Appel de la fonction pour g\'e9n\'e9rer le devis\par
+            generateContract(nomComplet, adresse, numeroTelephone, email, date1, heureDebut1, nombreHeures);\par
+\par
+            // Appel de la fonction pour envoyer un SMS apr\'e8s la g\'e9n\'e9ration du contrat\par
+            sendSMSNotification(nomComplet);\par
+\par
+            // Ajouter un \'e9v\'e9nement au calendrier Google\par
+            ajouterEvenementAuCalendrier(nomComplet, adresse, numeroTelephone, email, date1, heureDebut1, nombreHeures);\par
+\par
+\par
+            // R\'e9ponse de succ\'e8s \'e0 renvoyer au client\par
+            return ContentService.createTextOutput("Donn\'e9es enregistr\'e9es avec succ\'e8s.");\par
+        \} else \{\par
+            throw new Error('Les donn\'e9es de la requ\'eate sont manquantes ou incorrectes.');\par
+        \}\par
+    \} catch (error) \{\par
+        console.error(error);\par
+        return ContentService.createTextOutput("Une erreur est survenue lors du traitement des donn\'e9es : " + error.message);\par
+    \}\par
+\}\par
+\par
+// Fonction pour formater la date en DD-MM-YYYY\par
+function formatDate(dateString) \{\par
+    var date = new Date(dateString);\par
+    var day = ('0' + date.getDate()).slice(-2);\par
+    var month = ('0' + (date.getMonth() + 1)).slice(-2);\par
+    var year = date.getFullYear();\par
+    return day + '-' + month + '-' + year;\par
+\}\par
+\par
+// Fonction pour formater l'heure en HHhMM\par
+function formatTime(timeString) \{\par
+    var [hours, minutes] = timeString.split(':');\par
+    return hours + 'h' + minutes;\par
+\}\par
+\par
+// Fonction pour g\'e9n\'e9rer le contrat\par
+function generateContract(nomComplet, adresse, numeroTelephone, email, date1, heureDebut1, nombreHeures) \{\par
+    const TEMPLATE_ID = '1fsdc3tPacmw2-VTEuJY8dM3GhTu7OlGdnBjnudzXjT8'; // Remplacez par l'ID de votre mod\'e8le Google Docs\par
+    const folderId = '1C7CS-zHRlK5-E5tSieH7IpeaG4ZmgQom'; // Remplacez par l'ID de votre dossier o\'f9 vous souhaitez enregistrer le contrat\par
+    const folder = DriveApp.getFolderById(folderId); // Acc\'e8s au dossier\par
+\par
+    // Formater la date et l'heure\par
+    var formattedDate = formatDate(date1);\par
+    var formattedTime = formatTime(heureDebut1);\par
+\par
+    // Copie du mod\'e8le de devis\par
+    try \{\par
+        const templateFile = DriveApp.getFileById(TEMPLATE_ID);\par
+        // Inclure la date dans le nom du fichier\par
+        const newFile = templateFile.makeCopy(`Devis de $\{nomComplet\} - $\{formattedDate\}`, folder);\par
+        const newDoc = DocumentApp.openById(newFile.getId());\par
+        const body = newDoc.getBody();\par
+\par
+        // Remplacement des placeholders\par
+        body.replaceText('\{\{fullName\}\}', nomComplet);\par
+        body.replaceText('\{\{address\}\}', adresse);\par
+        body.replaceText('\{\{phoneNumber\}\}', numeroTelephone);\par
+        body.replaceText('\{\{email\}\}', email);\par
+        body.replaceText('\{\{date1\}\}', formattedDate);\par
+        body.replaceText('\{\{heureDebut1\}\}', formattedTime);\par
+        body.replaceText('\{\{nombreheurs\}\}', nombreHeures);\par
+\par
+        // Enregistrement des modifications\par
+        newDoc.saveAndClose();\par
+        \par
+        Logger.log(`Le contrat a \'e9t\'e9 cr\'e9\'e9 : $\{newDoc.getUrl()\}`);\par
+    \} catch (error) \{\par
+        Logger.log(`Erreur lors de la cr\'e9ation du contrat : $\{error.message\}`);\par
+    \}\par
+\}\par
+\par
+\par
+\par
+// Fonction onEdit pour envoyer un SMS lorsque les 9 premi\'e8res colonnes sont remplies\par
+function onEdit(e) \{\par
+    var sheet = e.source.getActiveSheet();\par
+    \par
+    // Remplacez par le nom de votre feuille\par
+    if (sheet.getName() === "data particulier") \{\par
+        var lastRow = sheet.getLastRow();\par
+        \par
+        // Utilisation de la colonne 13 pour v\'e9rifier si un SMS a \'e9t\'e9 envoy\'e9\par
+        var smsSent = sheet.getRange(lastRow, 13).getValue(); // Colonne 13 r\'e9serv\'e9e \'e0 l'\'e9tat "Envoy\'e9"\par
+        \par
+        if (smsSent === "Envoy\'e9") \{\par
+            // Si le SMS a d\'e9j\'e0 \'e9t\'e9 envoy\'e9, ne rien faire\par
+            return;\par
+        \}\par
+\par
+        // V\'e9rifie si toutes les colonnes n\'e9cessaires de la derni\'e8re ligne sont remplies\par
+        var nomComplet = sheet.getRange(lastRow, 1).getValue();\par
+        var adresse = sheet.getRange(lastRow, 2).getValue();\par
+        var numeroTelephone = sheet.getRange(lastRow, 3).getValue();\par
+        var email = sheet.getRange(lastRow, 4).getValue();\par
+        var confirmEmail = sheet.getRange(lastRow, 5).getValue();\par
+        var date1 = sheet.getRange(lastRow, 6).getValue();\par
+        var heureDebut1 = sheet.getRange(lastRow, 7).getValue();\par
+        var nombreHeures = sheet.getRange(lastRow, 8).getValue();\par
+        var conditionsGenerales = sheet.getRange(lastRow, 9).getValue();\par
+\par
+        // V\'e9rifie si toutes les valeurs n\'e9cessaires sont pr\'e9sentes\par
+        if (nomComplet && adresse && numeroTelephone && email && confirmEmail && date1 && heureDebut1 && nombreHeures && conditionsGenerales) \{\par
+            // Envoi de la notification SMS\par
+            sendSMSNotification(nomComplet);\par
+            \par
+            // Marque la ligne comme "Envoy\'e9" dans la colonne 13\par
+            sheet.getRange(lastRow, 13).setValue("Envoy\'e9");\par
+        \}\par
+    \}\par
+\}\par
+\par
+\par
+// La fonction d'envoi de SMS\par
+function sendSMSNotification(nomComplet) \{\par
+    const FIXED_RECIPIENT_NUMBER = '+33644932146'; // Remplacez par le num\'e9ro de t\'e9l\'e9phone du destinataire\par
+    let messageBody = `Nouveau client: $\{nomComplet\}`;\par
+\par
+    const payload = \{\par
+        phone: FIXED_RECIPIENT_NUMBER,\par
+        message: messageBody,\par
+        key: '98c5bf096b72d0002f00b91c48c1ca4363eb12b3CbW9m7taEWx8n6EWIUCB6MMgN' // Remplacez par votre jeton API Textbelt\par
+    \};\par
+\par
+    const options = \{\par
+        method: 'post',\par
+        contentType: 'application/json',\par
+        payload: JSON.stringify(payload),\par
+        muteHttpExceptions: true\par
+    \};\par
+\par
+    const url = '{{\field{\*\fldinst{HYPERLINK https://textbelt.com/text }}{\fldrslt{https://textbelt.com/text\ul0\cf0}}}}\f0\fs22 ';\par
+    try \{\par
+        const response = UrlFetchApp.fetch(url, options);\par
+        const responseJson = JSON.parse(response.getContentText());\par
+        \par
+        Logger.log('R\'e9ponse de l\\'API Textbelt: ' + JSON.stringify(responseJson));\par
+\par
+        if (responseJson.success) \{\par
+            Logger.log('SMS envoy\'e9 avec succ\'e8s. ID du message : ' + responseJson.textId);\par
+        \} else \{\par
+            Logger.log('Erreur lors de l\\'envoi du SMS: ' + responseJson.error);\par
+        \}\par
+    \} catch (error) \{\par
+        Logger.log('Erreur lors de l\\'appel \'e0 l\\'API Textbelt: ' + error);\par
+    \}\par
+\}\par
+\par
+\par
+function ajouterEvenementAuCalendrier(nomComplet, adresse, numeroTelephone, email, date1, heureDebut1, nombreHeures) \{\par
+    var calendar = CalendarApp.getDefaultCalendar(); // Utilise le calendrier par d\'e9faut\par
+    var startTime = new Date(date1 + ' ' + heureDebut1);\par
+    var endTime = new Date(startTime.getTime() + (nombreHeures * 60 * 60 * 1000)); // Dur\'e9e de l'\'e9v\'e9nement en heures\par
+\par
+    // Contenu de la note de l'\'e9v\'e9nement\par
+    var description = `\par
+    Nom: $\{nomComplet\}\par
+    Adresse: $\{adresse\}\par
+    T\'e9l\'e9phone: $\{numeroTelephone\}\par
+    Email: $\{email\}\par
+    Date: $\{formatDate(date1)\}\par
+    Heure de d\'e9but: $\{formatTime(heureDebut1)\}\par
+    Nombre d'heures: $\{nombreHeures\}\par
+    `;\par
+\par
+    // Cr\'e9ation de l'\'e9v\'e9nement dans Google Calendar\par
+    calendar.createEvent(`R\'e9servation de $\{nomComplet\}`, startTime, endTime, \{\par
+        description: description,\par
+        location: adresse\par
+    \});\par
+\par
+    Logger.log(`\'c9v\'e9nement ajout\'e9 au calendrier pour $\{nomComplet\}`);\par
+\}\par
+}
+ 

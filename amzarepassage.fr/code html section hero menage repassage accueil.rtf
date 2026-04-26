@@ -1,0 +1,331 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1036{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset1 Segoe UI Symbol;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang12 <!DOCTYPE html>\par
+<html lang="fr">\par
+<head>\par
+  <meta charset="UTF-8">\par
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">\par
+  <title>Service de repassage \'e0 domicile</title>\par
+  <style>\par
+    /* Reset CSS */\par
+    * \{\par
+      margin: 0;\par
+      padding: 0;\par
+      box-sizing: border-box;\par
+    \}\par
+\par
+    body \{\par
+      font-family: 'Arial', sans-serif;\par
+      background-color: #f4f4f4;\par
+      line-height: 1.6;\par
+    \}\par
+\par
+    /* Hero Section - Version Ordinateur */\par
+    .hero \{\par
+      background-image: url('https://i.imgur.com/exmAKOY.jpeg');\par
+      background-size: cover;\par
+      background-position: center;\par
+      height: 100vh;\par
+      display: flex;\par
+      flex-direction: column;\par
+      align-items: center;\par
+      justify-content: center;\par
+      position: relative;\par
+      color: #fff;\par
+      overflow: hidden;\par
+      transition: background-image 1s ease;\par
+    \}\par
+\par
+    .hero::before \{\par
+      content: "";\par
+      position: absolute;\par
+      top: 0;\par
+      left: 0;\par
+      right: 0;\par
+      bottom: 0;\par
+      background-color: rgba(0, 0, 0, 0.2);\par
+    \}\par
+\par
+    .hero-content \{\par
+      position: relative;\par
+      z-index: 2;\par
+      max-width: 1200px;\par
+      padding: 20px;\par
+      text-align: center;\par
+    \}\par
+\par
+    h1 \{\par
+      font-size: 2.2rem;\par
+      text-transform: uppercase;\par
+      font-weight: bold;\par
+      letter-spacing: 2px;\par
+    \}\par
+\par
+    .highlight \{\par
+      background-color: #fff;\par
+      padding: 0.2rem 0.5rem;\par
+      border-radius: 8px;\par
+      color: #e67e22;\par
+    \}\par
+\par
+    .repassage-highlight \{\par
+      color: #e67e22;\par
+      background-color: #fff;\par
+      padding: 0.2rem 0.5rem;\par
+      border-radius: 8px;\par
+    \}\par
+\par
+    .subtitle \{\par
+      font-size: 1rem;\par
+      margin: 1.5rem 0;\par
+      color: white;\par
+      background-color: #f1c40f;\par
+      padding: 0.5rem;\par
+      border-radius: 8px;\par
+      display: inline-block;\par
+    \}\par
+\par
+    .subtitle span.strike \{\par
+      text-decoration: line-through;\par
+      color: red;\par
+    \}\par
+\par
+    .cta-buttona \{\par
+      display: inline-block;\par
+      background-color: #e67e22;\par
+      color: white;\par
+      padding: 1rem 2rem;\par
+      text-decoration: none;\par
+      font-size: 1.2rem;\par
+      font-weight: bold;\par
+      border-radius: 50px;\par
+      transition: background-color 0.3s ease, transform 0.3s ease;\par
+      margin-top: 1rem;\par
+    \}\par
+\par
+    .cta-buttona:hover \{\par
+      background-color: #d35400;\par
+      transform: scale(1.05);\par
+    \}\par
+\par
+    .credit-impot \{\par
+      font-size: 0.9rem;\par
+      color: #fff;\par
+      padding: 0.5rem 1rem;\par
+      display: block;\par
+      border-radius: 8px;\par
+      margin-top: 0.5rem;\par
+      width: fit-content;\par
+      margin-left: auto;\par
+      margin-right: auto;\par
+    \}\par
+\par
+    /* Icons Section - Version Ordinateur */\par
+    .icon-section \{\par
+      display: grid;\par
+      grid-template-columns: repeat(6, 1fr);\par
+      gap: 1.5rem;\par
+      margin-top: -13rem;\par
+      position: relative;\par
+      z-index: 3;\par
+    \}\par
+\par
+    .icon \{\par
+      text-align: center;\par
+      background-color: rgba(255, 255, 255, 0.2);\par
+      border-radius: 12px;\par
+      padding: 1rem;\par
+      transition: transform 0.3s ease;\par
+    \}\par
+\par
+    .icon:hover \{\par
+      transform: scale(1.05);\par
+    \}\par
+\par
+    .icon img \{\par
+      width: 60px;\par
+      height: auto;\par
+      margin-bottom: 0.5rem;\par
+    \}\par
+\par
+    .icon p \{\par
+      font-size: 1rem;\par
+      color: #fff;\par
+    \}\par
+\par
+    /* Retour \'e0 la ligne sur mobile */\par
+    .mobile-break \{\par
+      display: none; /* Cacher par d\'e9faut */\par
+    \}\par
+\par
+    /* Version Mobile */\par
+    @media (max-width: 768px) \{\par
+      .hero \{\par
+        background-image: url('https://i.imgur.com/TEbIgR1.jpeg'); /* Image de fond mobile */\par
+        background-position: top center; /* D\'e9placer l'image vers le haut */\par
+        height: 70vh; /* R\'e9duire la hauteur pour laisser plus de place en haut */\par
+        padding-top: 50px; /* Ajouter du padding pour d\'e9caler le contenu vers le bas */\par
+      \}\par
+\par
+      h1 \{\par
+        font-size: 1.3rem;\par
+        margin-top: -2rem;\par
+      \}\par
+\par
+      .mobile-break \{\par
+        display: block; /* Afficher seulement sur mobile */\par
+      \}\par
+\par
+      .offer-text \{\par
+        display: inline; /* Assurer que le texte reste sur la m\'eame ligne */\par
+      \}\par
+\par
+      /* Supprimer le fond blanc autour des textes dans la version mobile */\par
+      .highlight, .repassage-highlight \{\par
+        background-color: transparent;\par
+        padding: 0;\par
+      \}\par
+\par
+      .repassage-highlight \{\par
+        color: yellow; /* Changer la couleur du mot "repassage" en jaune */\par
+      \}\par
+\par
+      .highlight \{\par
+        color: yellow; /* Changer la couleur du texte "8 \'80/heure" en jaune */\par
+      \}\par
+\par
+      .credit-impot span \{\par
+        color: white; /* Changer la couleur de l'\'e9toile en blanc */\par
+      \}\par
+\par
+      .subtitle \{\par
+        font-size: 0.8rem;\par
+        display: block;\par
+        line-height: 1.3;\par
+        margin-top: 1rem;\par
+        background-color: rgba(241, 196, 15, 0.5); /* Jaune avec opacit\'e9 */\par
+      \}\par
+\par
+      /* Retour \'e0 la ligne apr\'e8s "Offre sp\'e9ciale de lancement" */\par
+      .subtitle strong \{\par
+        display: block;\par
+        margin-bottom: 0.5rem;\par
+      \}\par
+\par
+      /* Retour \'e0 la ligne avant "8 \'80/heure" sur mobile */\par
+      .subtitle span:last-child \{\par
+        display: block;\par
+        margin-top: 0.5rem;\par
+      \}\par
+\par
+      .cta-buttona \{\par
+        padding: 0.8rem 1.5rem;\par
+        font-size: 1rem;\par
+      \}\par
+\par
+      /* Suppression des ic\'f4nes sur mobile */\par
+      .icon-section \{\par
+        display: none;\par
+      \}\par
+    \}\par
+  </style>\par
+</head>\par
+<body>\par
+\par
+  <!-- Hero Section -->\par
+  <section class="hero">\par
+    <div class="hero-content">\par
+      <h1>Votre <span class="repassage-highlight">m\'e9nage et repassage</span> \'e0 domicile<br class="mobile-break" /> \'e0 <span class="highlight">8 \'80/heure<span style="font-size: 0.7em; vertical-align: super;">\f1\u9733?\f0 </span></span></h1>\par
+      <p class="subtitle">\par
+        <strong>Offre sp\'e9ciale de lancement :</strong> \par
+        <span class="offer-text"><span class="strike">12 \'80/heure</span> 8 \'80/heure pendant deux mois pour les nouveaux clients !</span>\par
+      </p>\par
+      <br>\par
+      <a href="https://www.amzarepassage.fr/reservation_menage_et_repassage" class="cta-buttona">R\'e9servez d\'e8s maintenant</a>\par
+      <p class="credit-impot"><span style="font-size: 0.7em; vertical-align: super;">\f1\u9733?\f0 </span> Tarif apr\'e8s cr\'e9dit d'imp\'f4t, soit 16 \'80/heure avant r\'e9duction.</p>\par
+    </div>\par
+  </section>\par
+\par
+  <!-- Icons Section (affich\'e9e uniquement sur version ordinateur) -->\par
+  <div class="icon-section">\par
+    <div class="icon">\par
+      <img src="https://i.imgur.com/XuBbHRw.png" alt="Service de qualit\'e9">\par
+      <p>Service de qualit\'e9</p>\par
+    </div>\par
+    <div class="icon">\par
+      <img src="https://i.imgur.com/sgDroyG.png" alt="Longue exp\'e9rience">\par
+      <p>Longue exp\'e9rience</p>\par
+    </div>\par
+    <div class="icon">\par
+      <img src="https://i.imgur.com/7sa2mqr.png" alt="Offre sp\'e9ciale">\par
+      <p>Offre sp\'e9ciale pour nouveaux clients</p>\par
+    </div>\par
+    <div class="icon">\par
+      <img src="https://i.imgur.com/qG4P1Bo.png" alt="R\'e9duction de 50%">\par
+      <p>R\'e9duction imm\'e9diate de 50 % gr\'e2ce au cr\'e9dit d'imp\'f4t</p>\par
+    </div>\par
+    <div class="icon">\par
+      <img src="https://i.imgur.com/3dvVUxN.png" alt="Sans engagement">\par
+      <p>Sans engagement ni frais d'annulation</p>\par
+    </div>\par
+    <div class="icon">\par
+      <img src="https://i.imgur.com/qe6Tmkr.png" alt="Proc\'e9dures simplifi\'e9es">\par
+      <p>Des proc\'e9dures simplifi\'e9es et rapides</p>\par
+    </div>\par
+  </div>\par
+\par
+  <!-- JavaScript pour la transition d'image de fond uniquement sur PC -->\par
+\par
+<script>\par
+  const hero = document.querySelector('.hero');\par
+  const images = [\par
+    \par
+    '{{\field{\*\fldinst{HYPERLINK https://i.imgur.com/X57LRPk.jpeg }}{\fldrslt{https://i.imgur.com/X57LRPk.jpeg\ul0\cf0}}}}\f0\fs22 ',\par
+    '{{\field{\*\fldinst{HYPERLINK https://i.imgur.com/ZR1tagZ.jpeg }}{\fldrslt{https://i.imgur.com/ZR1tagZ.jpeg\ul0\cf0}}}}\f0\fs22 ',\par
+    '{{\field{\*\fldinst{HYPERLINK https://i.imgur.com/WqYmeKI.jpeg }}{\fldrslt{https://i.imgur.com/WqYmeKI.jpeg\ul0\cf0}}}}\f0\fs22 ',\par
+    '{{\field{\*\fldinst{HYPERLINK https://i.imgur.com/exmAKOY.jpeg }}{\fldrslt{https://i.imgur.com/exmAKOY.jpeg\ul0\cf0}}}}\f0\fs22 ',\par
+    '{{\field{\*\fldinst{HYPERLINK https://i.imgur.com/4Qyag7T.jpeg }}{\fldrslt{https://i.imgur.com/4Qyag7T.jpeg\ul0\cf0}}}}\f0\fs22 '\par
+\par
+  ];\par
+  let currentImage = 0;\par
+  let imagesLoaded = 0;\par
+\par
+  // Pr\'e9charger les images\par
+  images.forEach(src => \{\par
+    const img = new Image();\par
+    img.src = src;\par
+    img.onload = () => \{\par
+      imagesLoaded++;\par
+      // Lorsque toutes les images sont charg\'e9es, commencez la transition\par
+      if (imagesLoaded === images.length) \{\par
+        setInterval(changeBackground, 5000); // Change d'image toutes les 5 secondes\par
+      \}\par
+    \};\par
+  \});\par
+\par
+// Modifiez cette partie du script JavaScript\par
+function changeBackground() \{\par
+  if (window.innerWidth > 768) \{ // V\'e9rifie si l'\'e9cran est sup\'e9rieur \'e0 768px\par
+    currentImage = (currentImage + 1) % images.length;\par
+    hero.style.backgroundImage = `url($\{images[currentImage]\})`;\par
+  \}\par
+\}\par
+\par
+// Affiche la premi\'e8re image d\'e8s le d\'e9but\par
+if (window.innerWidth > 768) \{ // V\'e9rifie si l'\'e9cran est sup\'e9rieur \'e0 768px\par
+  hero.style.backgroundImage = `url($\{images[0]\})`;\par
+\} else \{\par
+  hero.style.backgroundImage = 'url("https://i.imgur.com/TEbIgR1.jpeg")'; // Image fixe pour mobile\par
+\}\par
+  \par
+  \par
+  \par
+</script>\par
+\par
+\par
+\par
+</body>\par
+</html>\par
+}
+ 
