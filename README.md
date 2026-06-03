@@ -10,6 +10,8 @@ Ce projet illustre la conception et l'implémentation d'un **système d'automati
 
 ### Résultat : 100% du flux client automatisé, de la réservation à la facturation.
 
+<img width="1553" height="856" alt="image" src="https://github.com/user-attachments/assets/6d04d1fd-a42d-4d11-9bdc-c38b9b3ec350" />
+
 ---
 
 ## 🎯 Contexte Entrepreneurial
